@@ -1,0 +1,25 @@
+{% load static %}
+
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Gerenciamento</title>
+    <link rel="stylesheet" href="{% static 'base.css' %}" />
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="logo">Logo</a>
+        <nav class="navbar"></nav>
+        <div class="header-icons">
+            <a href=""><i class="bxr bx-bell"></i></a>
+            <a href="{% url 'criar_conta' %}"><i class="bxr bx-user"></i></a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-container">
+    <h1 class="page-title">Excluir Equipamento</h1>
+    <p>Tem certeza que deseja excluir o equipamento abaixo?</p>
+
+    <div class="confirmation-details">
+        <p><strong>ID:</strong> {{ equipamento.id }}</p>
+        <p><strong>Nome:</strong> {{ equipamento.nome }}</p>
+        <p><strong>Quantidade Disponível:</strong> {{ equipamento.quantidade_disponivel }}</p>
+        <p><strong>Validade:</strong> {{ equipamento.validade }}</p>
+        <p><strong>Status:</strong> {{ equipamento.status }}</p>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+            <a href="{% url 'equipamentos_lista' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

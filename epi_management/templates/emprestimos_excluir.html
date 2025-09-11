@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-container">
+    <h1 class="page-title">Excluir Empréstimo</h1>
+    <p>Tem certeza que deseja excluir o empréstimo abaixo?</p>
+
+    <div class="confirmation-details">
+        <p><strong>ID:</strong> {{ emprestimo.id }}</p>
+        <p><strong>Data de Empréstimo:</strong> {{ emprestimo.data_emprestimo }}</p>
+        <p><strong>Data de Devolução:</strong> {{ emprestimo.data_devolucao }}</p>
+        <p><strong>Status:</strong> {{ emprestimo.status.nome }}</p>
+        <p><strong>Usuário:</strong> {{ emprestimo.usuario.nome }}</p>
+        <p><strong>Colaborador:</strong> {{ emprestimo.colaborador.nome }}</p>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+            <a href="{% url 'emprestimos_lista' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

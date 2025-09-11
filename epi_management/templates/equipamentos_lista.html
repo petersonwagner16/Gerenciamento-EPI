@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-container">
+  <h1>Lista de Equipamentos</h1>
+  
+  
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Quant_disponivel</th>
+        <th>Validade</th>
+        <th>status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for equipamento in equipamentos %}
+      <tr>
+        <td>{{ equipamento.id }}</td>
+        <td>{{ equipamento.nome }}</td>
+        <td>{{ equipamento.quantidade_disponivel }}</td>
+        <td>{{ equipamento.validade }}</td>
+        <td>{{ equipamento.status.nome }}</td>
+        <td class="table-actions">
+          <a href="{% url 'equipamentos_editar' pk=equipamento.pk %}" class="edit-btn">Editar</a>
+          <a href="{% url 'equipamentos_excluir' pk=equipamento.pk %}" class="delete-btn">Excluir</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6">Nenhum Equipamento cadastrado.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+<div class="main-container">
+    <h2>Lista de Usuários</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Nível de Acesso</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.nome }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.nivel_acesso }}</td>
+                <td class="table-actions">
+                    <a href="{% url 'usuarios_editar' pk=usuario.pk %}" class="btn edit-btn">Editar</a>
+                    <a href="{% url 'usuarios_excluir' pk=usuario.pk %}" class="btn delete-btn">Excluir</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Nenhum usuário cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-container">
+  <h1 class="page-title">Lista de Colaboradores</h1>
+  
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Setor</th>
+        <th>Função</th>
+        <th>CPF</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for colaborador in colaboradores %}
+      <tr>
+        <td>{{ colaborador.id }}</td>
+        <td>{{ colaborador.nome }}</td>
+        <td>{{ colaborador.setor }}</td>
+        <td>{{ colaborador.funcao }}</td>
+        <td>{{ colaborador.cpf }}</td>
+        <td class="table-actions">
+          <a href="{% url 'colaboradores_editar' pk=colaborador.pk %}" class="edit-btn">Editar</a>
+          <a href="{% url 'colaboradores_excluir' pk=colaborador.pk %}" class="delete-btn">Excluir</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6" class="no-data">Nenhum colaborador cadastrado.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

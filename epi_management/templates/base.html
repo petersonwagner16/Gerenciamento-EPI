@@ -1,0 +1,50 @@
+{% load static %}
+
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gerenciamento</title>
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  </head>
+  <body>
+    
+    <header class="header">
+        <a href="/" class="logo">Logo</a>
+        <nav class="navbar">
+          
+        </nav>
+        <div class="header-icons">
+            <a href=""><i class='bx bx-bell'></i></a>
+            <a href="{% url 'criar_conta' %}"><i class='bx bx-user'></i></a>
+        </div>
+    </header>
+
+    <div class="sidebar">
+      <div class="sidebar-item">
+        <a href="{% url 'colaboradores_lista' %}" class="item-link">Colaborador</a>
+        <a href="{% url 'colaboradores_criar' %}" class="item-action"><i class='bx bx-plus'></i></a>
+      </div>
+      <div class="sidebar-item">
+        <a href="{% url 'equipamentos_lista' %}" class="item-link">Equipamento</a>
+        <a href="{% url 'equipamentos_criar' %}" class="item-action"><i class='bx bx-plus'></i></a>
+      </div>
+      <div class="sidebar-item">
+        <a href="{% url 'usuarios_lista' %}" class="item-link">Usuário</a>
+        <a href="{% url 'usuarios_criar' %}" class="item-action"><i class='bx bx-plus'></i></a>
+      </div>
+      <div class="sidebar-item">
+        <a href="{% url 'emprestimos_lista' %}" class="item-link">Empréstimo</a>
+        <a href="{% url 'emprestimos_criar' %}" class="item-action"><i class='bx bx-plus'></i></a>
+      </div>
+    </div>
+
+    <main class="main-content">
+      {% block content %}
+      {% endblock %}
+    </main>
+
+  </body>
+</html>

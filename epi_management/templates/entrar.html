@@ -1,0 +1,16 @@
+{% extends 'base_login.html' %}
+{% load static %}
+
+
+
+{% block content %}
+<div class="login-container">
+    <h1>Entrar</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+    <p>Não tem uma conta? <a href="{% url 'criar_conta' %}">Criar Conta</a></p>
+</div>
+{% endblock %}
