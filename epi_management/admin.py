@@ -1,11 +1,8 @@
-# No seu arquivo admin.py
 
-# ... (seus outros imports)
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import StatusEquipamento, StatusEmprestimo, NivelAcesso, Colaborador, Equipamento, Usuario, Emprestimo
 
-# ... (seus outros registros de modelos)
 admin.site.register(StatusEquipamento)
 admin.site.register(StatusEmprestimo)
 admin.site.register(NivelAcesso)

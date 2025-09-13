@@ -26,7 +26,7 @@ class EquipamentoForm(forms.ModelForm):
 class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = '__all__'
+        fields = ['nome', 'email', 'nivel_acesso']
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.TextInput(attrs={'class': 'form-control'}),
@@ -43,6 +43,7 @@ class EmprestimoForm(forms.ModelForm):
             'status': forms.Select(attrs={'class': 'form-control'}),
             'usuario': forms.Select(attrs={'class': 'form-control'}),
             'colaborador': forms.Select(attrs={'class': 'form-control'}),
+            'equipamento': forms.Select(attrs={'class': ''})
         }
 
 

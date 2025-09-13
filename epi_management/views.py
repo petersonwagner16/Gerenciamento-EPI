@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Colaborador, Equipamento, Usuario, Emprestimo, NivelAcesso
 from .forms import ColaboradorForm, EquipamentoForm, UsuarioForm, EmprestimoForm, LoginForm, RegistroForm
 from django.contrib.auth import authenticate, login
+from django.db.models import Q
+from django.contrib import messages
+
 
 def home(request):
     return render(request, 'base.html')
@@ -9,20 +12,50 @@ def home(request):
 
 
 def colaboradores_lista(request):
-    colaboradores = Colaborador.objects.all()
-    return render(request, 'colaboradores_lista.html', {'colaboradores': colaboradores})
+    query = request.GET.get('q')
+    if query:
+        colaboradores = Colaborador.objects.filter(Q(nome__icontains=query))
+    else:
+        colaboradores = Colaborador.objects.all()
+    return render(request, 'colaboradores_lista.html', {
+        'colaboradores': colaboradores,
+        'query': query
+    })
 
 def equipamentos_lista(request):
-    equipamentos = Equipamento.objects.all()
-    return render(request, 'equipamentos_lista.html', {'equipamentos': equipamentos})
+    query = request.GET.get('q')
+    if query:
+        equipamentos = Equipamento.objects.filter(Q(nome__icontains=query))
+    else:
+        equipamentos = Equipamento.objects.all()
+    return render(request, 'equipamentos_lista.html', {
+        'equipamentos': equipamentos,
+        'query': query
+    })
 
 def usuarios_lista(request):
-    usuarios = Usuario.objects.all()
-    return render(request, 'usuarios_lista.html', {'usuarios': usuarios})
+    query = request.GET.get('q')
+    if query:
+        usuarios = Usuario.objects.filter(Q(nome__icontains=query))
+    else:
+        usuarios = Usuario.objects.all()
+    return render(request, 'usuarios_lista.html', {
+        'usuarios': usuarios,
+        'query': query
+    })
 
 def emprestimos_lista(request):
-    emprestimos = Emprestimo.objects.all()
-    return render(request, 'emprestimos_lista.html', {'emprestimos': emprestimos})
+    query = request.GET.get('q')
+    if query:
+        emprestimos = Emprestimo.objects.filter(
+            Q(colaborador__nome__icontains=query) | Q(equipamento__nome__icontains=query)
+        )
+    else:
+        emprestimos = Emprestimo.objects.all()
+    return render(request, 'emprestimos_lista.html', {
+        'emprestimos': emprestimos,
+        'query': query
+    })
 
 def colaboradores_criar(request):
     if request.method == 'POST':
@@ -39,7 +72,10 @@ def equipamentos_criar(request):
         form = EquipamentoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('equipamentos_lista')
+            messages.success(request, 'Equipamento cadastrado com sucesso!')
+            return redirect('equipamentos_criar')
+        else:
+            messages.error(request, 'Erro ao cadastrar equipamento. Verifique os dados.')
     else:
         form = EquipamentoForm()
     return render(request, 'equipamentos_form.html', {'form': form})

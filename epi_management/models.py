@@ -70,7 +70,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True, validators=[validate_email])
     nivel_acesso = models.ForeignKey(NivelAcesso, on_delete=models.CASCADE)
     
-    # Adicione estes campos corrigidos
+   
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='epi_management_usuarios',
@@ -103,6 +103,7 @@ class Emprestimo(models.Model):
     status = models.ForeignKey(StatusEmprestimo, on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     colaborador = models.ForeignKey(Colaborador, on_delete=models.CASCADE)
+    equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Empréstimo para {self.colaborador}"

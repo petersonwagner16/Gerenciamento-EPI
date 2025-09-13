@@ -3,6 +3,12 @@
 {% block content %} 
 <div class="main-container">
     <h2>Lista de Usuários</h2>
+
+    <form method="get" action="{% url 'usuarios_lista' %}">
+        <input type="text" name="q" placeholder="Pesquisar por nome" value="{{ query }}">
+        <button type="submit">🔍 Buscar</button>
+      </form>
+
     <table class="data-table">
         <thead>
             <tr>
