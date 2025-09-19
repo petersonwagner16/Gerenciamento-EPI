@@ -15,7 +15,7 @@ Este é um sistema web desenvolvido em Django para gerenciar o controle de Equip
 * **Listar dados**: Exibe uma lista de todos os registros (colaboradores, equipamentos, empréstimos).
 * **Atualizar dados**: Permite a edição de registros existentes.
 * **Excluir dados**: Possibilita a remoção de registros.
-* **Página de Login**: Autenticação de usuários para acesso seguro ao sistema.
+
 
 ---
 
