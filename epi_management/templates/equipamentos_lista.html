@@ -2,11 +2,16 @@
 
 {% block content %}
 <div class="main-container">
-  <h1>Lista de Equipamentos</h1>
-  <form method="get" action="{% url 'colaboradores_lista' %}">
-    <input type="text" name="q" placeholder="Pesquisar por nome" value="{{ query }}">
-    <button type="submit">🔍 Buscar</button>
-  </form>
+  <h1 class="page-title">Lista de Equipamentos</h1>
+
+    <form method="get" action="{% url 'equipamentos_lista' %}" class="search-form">
+        <div class="input-group">
+            <input type="text" name="q" placeholder="Buscar..." class="form-control search-input" value="{{ query|default:'' }}">
+            <button type="submit" class="btn btn-primary search-btn">
+                <i class='bx bx-search'></i> Buscar
+            </button>
+        </div>
+    </form>
   
   <table class="data-table">
     <thead>
@@ -16,6 +21,7 @@
         <th>Quant_disponivel</th>
         <th>Validade</th>
         <th>status</th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>

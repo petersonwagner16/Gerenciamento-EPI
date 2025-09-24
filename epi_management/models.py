@@ -2,6 +2,7 @@
 from django.db import models
 from django.core.validators import validate_email
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.utils import timezone
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, nome, password=None):
@@ -98,12 +99,14 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         return self.nome
 
 class Emprestimo(models.Model):
-    data_emprestimo = models.DateField()
-    data_devolucao = models.DateField()
-    status = models.ForeignKey(StatusEmprestimo, on_delete=models.CASCADE)
+    data_emprestimo = models.DateField(default=timezone.now)
+    data_devolucao_prevista = models.DateField()
+    data_devolucao_efetiva = models.DateField(null=True, blank=True)
+    status = models.ForeignKey(StatusEmprestimo, on_delete=models.PROTECT)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     colaborador = models.ForeignKey(Colaborador, on_delete=models.CASCADE)
     equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE)
+    observacoes_devolucao = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"Empréstimo para {self.colaborador}"
+        return f'Empréstimo de {self.equipamento.nome} para {self.colaborador.nome}'

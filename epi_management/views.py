@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Colaborador, Equipamento, Usuario, Emprestimo, NivelAcesso
-from .forms import ColaboradorForm, EquipamentoForm, UsuarioForm, EmprestimoForm, LoginForm, RegistroForm
-from django.contrib.auth import authenticate, login
+from .forms import ColaboradorForm, EquipamentoForm, UsuarioForm, EmprestimoForm
 from django.db.models import Q
 from django.contrib import messages
 
@@ -62,9 +61,14 @@ def colaboradores_criar(request):
         form = ColaboradorForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('colaboradores_lista')
+            messages.success(request, 'Colaborador cadastrado com sucesso!')
+            return redirect('colaboradores_criar')
+        else:
+            messages.error(request, 'Erro ao cadastrar. Verifique os dados.')
+            
     else:
         form = ColaboradorForm()
+
     return render(request, 'colaboradores_form.html', {'form': form})
 
 def equipamentos_criar(request):
@@ -85,7 +89,10 @@ def usuarios_criar(request):
         form = UsuarioForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('usuarios_lista')
+            messages.success(request, 'Usuário cadastrado com sucesso!')
+            return redirect('usuarios_criar')
+        else:
+            messages.error(request, 'Erro ao cadastrar usuário. Verifique os dados.')
     else:
         form = UsuarioForm()
     return render(request, 'usuarios_form.html', {'form': form})
@@ -95,7 +102,10 @@ def emprestimos_criar(request):
         form = EmprestimoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('emprestimos_lista')
+            messages.success(request, 'Empréstimo cadastrado com sucesso!')
+            return redirect('emprestimos_criar')
+        else:
+            messages.error(request, 'Erro ao cadastrar empréstimo. Verifique os dados.')
     else:
         form = EmprestimoForm()
     return render(request, 'emprestimos_form.html', {'form': form})
@@ -172,39 +182,3 @@ def emprestimos_editar(request, pk):
         form = EmprestimoForm(instance=emprestimo)
     return render(request, 'emprestimos_form.html', {'form': form})
 
-def entrar_view(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            
-            user = authenticate(request, username=email, password=password)
-            
-            if user is not None:
-                login(request, user)
-                return redirect('home')
-            else:
-                form.add_error(None, 'Email ou senha incorretos.')
-    else:
-        form = LoginForm()
-    return render(request, 'entrar.html', {'form': form})
-
-def criar_conta_view(request):
-    if request.method == 'POST':
-        form = RegistroForm(request.POST) 
-        if form.is_valid():
-            usuario = form.save(commit=False)
-            usuario.set_password(form.cleaned_data['senha1'])
-            
-            try:
-                nivel_usuario = NivelAcesso.objects.get(nome='Usuario')
-            except NivelAcesso.DoesNotExist:
-                nivel_usuario = NivelAcesso.objects.create(nome='Usuario')
-            
-            usuario.nivel_acesso = nivel_usuario
-            usuario.save()
-            return redirect('entrar') 
-    else:
-        form = RegistroForm()
-    return render(request, 'criar_conta.html', {'form': form})

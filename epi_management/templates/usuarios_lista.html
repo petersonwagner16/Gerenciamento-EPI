@@ -1,14 +1,18 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
-{% block content %} 
+{% block content %}
 <div class="main-container">
-    <h2>Lista de Usuários</h2>
+    <h1 class="page-title">Lista de Usuários</h1>
 
-    <form method="get" action="{% url 'usuarios_lista' %}">
-        <input type="text" name="q" placeholder="Pesquisar por nome" value="{{ query }}">
-        <button type="submit">🔍 Buscar</button>
-      </form>
-
+    <form method="get" action="{% url 'usuarios_lista' %}" class="search-form">
+        <div class="input-group">
+            <input type="text" name="q" placeholder="Buscar..." class="form-control search-input" value="{{ query|default:'' }}">
+            <button type="submit" class="btn btn-primary search-btn">
+                <i class='bx bx-search'></i> Buscar
+            </button>
+        </div>
+    </form>
+    
     <table class="data-table">
         <thead>
             <tr>
@@ -27,13 +31,13 @@
                 <td>{{ usuario.email }}</td>
                 <td>{{ usuario.nivel_acesso }}</td>
                 <td class="table-actions">
-                    <a href="{% url 'usuarios_editar' pk=usuario.pk %}" class="btn edit-btn">Editar</a>
-                    <a href="{% url 'usuarios_excluir' pk=usuario.pk %}" class="btn delete-btn">Excluir</a>
+                    <a href="{% url 'usuarios_editar' pk=usuario.pk %}" class="edit-btn">Editar</a>
+                    <a href="{% url 'usuarios_excluir' pk=usuario.pk %}" class="delete-btn">Excluir</a>
                 </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="5">Nenhum usuário cadastrado.</td>
+                <td colspan="5">Nenhum Usuário cadastrado.</td>
             </tr>
             {% endfor %}
         </tbody>
