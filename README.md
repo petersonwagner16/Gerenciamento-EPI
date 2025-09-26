@@ -57,41 +57,16 @@ python -m venv venv
 python3 -m venv venv
 source venv/bin/activate
 ```
-✅ 3. Instale as dependências
-Com o ambiente virtual ativado, instale as bibliotecas necessárias listadas no arquivo requirements.txt.
+✅ 3. Instale o django
+Com o ambiente virtual ativado, instale o Django com o comando abaixo.
 
 ```Bash
 
-pip install -r requirements.txt
+pip install django
 ```
-✅ 4. Execute as migrações
-Este passo cria e aplica as migrações para que a estrutura do seu banco de dados seja criada com base nos seus modelos do Django.
 
-Bash
 
-python manage.py makemigrations
-python manage.py migrate
-✅ 5. Carregue os Dados Iniciais
-Para que o projeto funcione corretamente, ele precisa de alguns dados essenciais que já vêm com o sistema. Esses dados incluem os tipos de status de equipamentos, status de empréstimos e níveis de acesso, que são a base para o funcionamento das outras partes do sistema.
-
-Para carregar esses dados, execute os comandos abaixo. Eles vão preencher o seu banco de dados com as informações necessárias:
-
-```Bash
-
-python manage.py loaddata status_equipamento.json
-python manage.py loaddata status_emprestimo.json
-python manage.py loaddata niveis_acesso.json
-```
-✅ 6. Crie um Superusuário
-Crie um usuário com privilégios de administrador para acessar a área de administração do Django.
-
-```Bash
-
-python manage.py createsuperuser
-```
-Siga as instruções para definir e-mail e senha.
-
-✅ 7. Inicie o servidor
+✅ 4. Inicie o servidor
 Agora, você pode iniciar o servidor de desenvolvimento do Django.
 
 ```Bash
