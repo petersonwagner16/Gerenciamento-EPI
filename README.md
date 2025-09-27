@@ -40,7 +40,7 @@ Abra o seu terminal (Git Bash, PowerShell, etc.) e clone o projeto do GitHub.
 
 ```bash
 git clone (https://github.com/petersonwagner16/Gerenciamento-EPI.git)
-cd Gerenciamento-EPI
+
 ```
 
 ✅ 2. Crie e ative o ambiente virtual
