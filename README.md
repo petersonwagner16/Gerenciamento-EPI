@@ -39,7 +39,7 @@ Abra o seu terminal (Git Bash, PowerShell, etc.) e clone o projeto do GitHub.
 
 
 ```bash
-git clone (https://github.com/petersonwagner16/Gerenciamento-EPI.git)
+git clone https://github.com/petersonwagner16/Gerenciamento-EPI.git
 
 ```
 
